@@ -1,0 +1,129 @@
+{% extends 'base_templates/base.html' %}
+{% load static %}
+
+{% block customCSS %}
+<style>
+    .hero-section {
+        background-color: #f8f9fa;
+        padding: 80px 0;
+        text-align: center;
+    }
+
+    .feature-card {
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        background-color: white;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .feature-icon {
+        font-size: 40px;
+        color: #0d6efd;
+        margin-bottom: 20px;
+    }
+
+    .doctor-card {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .service-section {
+        padding: 60px 0;
+        background-color: #fff;
+    }
+
+    .cta-section {
+        background-color: #0d6efd;
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .btn-primary {
+        padding: 12px 30px;
+        font-size: 1.1em;
+    }
+</style>
+{% endblock %}
+
+{% block title %}Welcome to Medical Appointments{% endblock %}
+
+{% block body %}
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <h1 class="display-4 mb-4">Your Health, Our Priority</h1>
+        <p class="lead mb-4">Schedule appointments with our expert medical professionals easily and quickly.</p>
+        <a href="{% url 'appointment:get_service_list' %}" class="btn btn-primary btn-lg">Book Appointment Now</a>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon">🏥</div>
+                <h3>Easy Scheduling</h3>
+                <p>Book appointments online 24/7 at your convenience</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon">📅</div>
+                <h3>Instant Confirmation</h3>
+                <p>Receive immediate confirmation and reminders via email</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon">⏰</div>
+                <h3>Flexible Timing</h3>
+                <p>Choose from various available time slots that suit you</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<div class="service-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Medical Services</h2>
+        <div class="row">
+            {% for service in services %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ service.name }}</h5>
+                        <p class="card-text">{{ service.description }}</p>
+                        <p class="card-text"><small class="text-muted">Duration: {{ service.duration }} minutes</small></p>
+                        <a href="{% url 'appointment:appointment_request' service.id %}" class="btn btn-outline-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-section">
+    <div class="container">
+        <h2 class="mb-4">Ready to Schedule Your Visit?</h2>
+        <p class="lead mb-4">Our medical professionals are here to help you with your healthcare needs.</p>
+        <a href="{% url 'appointment:get_service_list' %}" class="btn btn-light btn-lg">View All Services</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block customJS %}
+<script>
+    // Any additional JavaScript can go here
+</script>
+{% endblock %}

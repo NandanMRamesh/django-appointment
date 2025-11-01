@@ -8,12 +8,18 @@ Since: 1.0.0
 
 from datetime import date, timedelta
 
+def home(request):
+    """Home page view showing featured medical services."""
+    services = Service.objects.all()
+    return render(request, 'appointment/home.html', {'services': services})
+
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.forms import SetPasswordForm
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
+from appointment.models import Service
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.encoding import force_str
